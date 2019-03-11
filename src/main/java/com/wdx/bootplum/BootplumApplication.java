@@ -8,6 +8,7 @@ public class BootplumApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BootplumApplication.class, args);
+        System.err.println("启动成功");
     }
 
 }
