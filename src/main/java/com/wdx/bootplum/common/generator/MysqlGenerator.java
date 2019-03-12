@@ -28,7 +28,7 @@ public class MysqlGenerator {
     //mapper.xml文件的输出路径
     public static String mapperOutputDir = "/sr/main/java/com/wdx/bootplum/";
     public static String author = "wangwei";
-    public static String dataSourceUrl = "jdbc:mysql://47.93.32.167:3309/bootplum?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true";
+    public static String dataSourceUrl = "jdbc:mysql://:3306/bootplum?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true";
     public static String driverName = "com.mysql.jdbc.Driver";
     public static String username = "root";
     public static String password = "p@ssw0rd";
