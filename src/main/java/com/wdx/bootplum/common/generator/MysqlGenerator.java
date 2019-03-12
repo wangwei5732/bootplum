@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 /**
  * <p>
- * mysql 代码生成器演示例子
+ * MP的mysql 代码生成器，可优化
  * </p>
  *
  * @author jobob
