@@ -1,11 +1,12 @@
 spring:
-  # 数据源配置
+  # MP数据源配置
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://47.93.32.167:3309/bootplum?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
     username: root
     password: p@ssw0rd
+    # 阿里连接池配置
     druid:
       # 初始化大小，最小，最大
       initial-size: 5
@@ -46,3 +47,6 @@ spring:
         login-username: admin
         # 登录密码
         login-password: 123456
+# MP 其他配置
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
