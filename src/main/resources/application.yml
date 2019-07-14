@@ -1,6 +1,6 @@
 spring:
   profiles:
-    #开发环境
+    #开发环境,指定yml及logback的日志配置为dev
     active: dev
-    #生产环境
+    #生产环境,指定yml及logback的日志配置为prod
 #    active: prod

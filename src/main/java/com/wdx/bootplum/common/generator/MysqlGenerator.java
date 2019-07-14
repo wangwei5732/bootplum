@@ -28,15 +28,15 @@ public class MysqlGenerator {
     //mapper.xml文件的输出路径
     public static String mapperOutputDir = "/sr/main/java/com/wdx/bootplum/";
     public static String author = "wangwei";
-    public static String dataSourceUrl = "jdbc:mysql://:3306/bootplum?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true";
+    public static String dataSourceUrl = "jdbc:mysql://47.93.32.167:3309/bootplum?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true";
     public static String driverName = "com.mysql.jdbc.Driver";
     public static String username = "root";
     public static String password = "p@ssw0rd";
     public static String parrentUrl = "com.wdx.bootplum";
-    //model的包路径
-    public static String superEntityPath = "com.wdx.bootplum.system.model";
-    //controller的包路径
-    public static String superControllerPath = "com.wdx.bootplum.system.controller";
+    //继承的bean的包路径
+    public static String superEntityPath = "com.wdx.bootplum.system.entity";
+    //继承的controller的包路径
+    public static String superControllerPath = "com.wdx.bootplum.common.controller.BaseController";
 
     /**
      * <p>
@@ -70,6 +70,7 @@ public class MysqlGenerator {
         gc.setOutputDir(projectPath + javaOutputDir);
         gc.setAuthor(author);
         gc.setOpen(false);
+        gc.setEntityName("%sDO");
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
@@ -111,7 +112,7 @@ public class MysqlGenerator {
         StrategyConfig strategy = new StrategyConfig();
         strategy.setNaming(NamingStrategy.underline_to_camel);
         strategy.setColumnNaming(NamingStrategy.underline_to_camel);
-        strategy.setSuperEntityClass(superEntityPath);
+//        strategy.setSuperEntityClass(superEntityPath);
         strategy.setEntityLombokModel(true);
         strategy.setSuperControllerClass(superControllerPath);
         strategy.setInclude(scanner("表名"));

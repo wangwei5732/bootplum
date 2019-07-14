@@ -1,11 +1,30 @@
+bootplum:
+  uploadPath: E:/uploaded_files/
+server:
+  port: 3072
 spring:
+  ## quartz
+  # 采用数据库存储方式
+#  quartz:
+#    job-store-type: jdbc
+#    jdbc:
+#      comment-prefix:
+  logging:
+    level:
+      root: error
+      com.bootdo: info
+      #时间格式配置
+  jackson:
+        date-format: yyyy-MM-dd HH:mm:ss
+        time-zone: GMT+8
+        locale: zh
   # MP数据源配置
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://:3306/bootplum?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    url: jdbc:mysql://192.168.40.101:3306/bootplum?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
     username: root
-    password: p@ssw0rd
+    password: 123456
     # 阿里连接池配置
     druid:
       # 初始化大小，最小，最大
@@ -47,6 +66,57 @@ spring:
         login-username: admin
         # 登录密码
         login-password: 123456
+  redis:
+    # Redis数据库索引（默认为0）
+    database: 0
+    # Redis服务器地址
+    host: 39.105.92.184
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password: 123456
+    # 连接池最大连接数（使用负值表示没有限制）
+    lettuce:
+      pool:
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 200
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: 1000
+        # 连接池中的最大空闲连接
+        max-idle: 10
+        # 连接池中的最小空闲连接
+        min-idle: 0
+    #客户端超时时间单位是毫秒 默认是2000
+    timeout: 10000
+
 # MP 其他配置
 mybatis-plus:
-  mapper-locations: classpath*:mapper/*.xml
+  # 配置xml的扫描路径，不放在resource下面需要在pom里添加一段代码（小坑）
+  mapper-locations: classpath*:com/wdx/bootplum/*/mapper/xml/*.xml
+  #  别名包扫描路径，通过该属性可以给包中的类注册别名，注册后在 Mapper 对应的 XML 文件中可以直接使用类名，而不用使用全限定的类名
+  typeAliasesPackage: com.wdx.bootplum.*.*.entity
+  # 枚举扫描路径
+  type-enums-package: com.wdx.bootplum.*.*.enums
+  #  配置扫描通用枚举
+  #  typeEnumsPackage: com.mgdaas.profarmer.enums
+  global-config:
+    #刷新mapper 调试神器 ---该配置不建议在生产环境打开！
+    refresh-mapper: true
+    # 数据库相关配置
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: UUID
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: not_empty
+      #驼峰下划线转换
+      column-underline: true
+      #逻辑删除配置
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+      db-type: mysql
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false #配置的缓存的全局开关
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #打印sql语句,调试用
+
+

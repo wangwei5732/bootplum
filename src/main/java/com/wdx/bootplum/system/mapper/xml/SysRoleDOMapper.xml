@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wdx.bootplum.system.mapper.SysRoleMapper">
+
+	<insert id="add" parameterType="com.wdx.bootplum.system.entity.SysRoleAddDTO"
+			useGeneratedKeys="true" keyProperty="roleId">
+		insert into sys_role
+		(
+		`role_id`,
+		`role_name`,
+		`role_sign`,
+		`remark`,
+		`create_by`,
+		`create_date`,
+		`update_by`,
+		`update_date`
+		)
+		values
+		(
+		#{roleId},
+		#{roleName},
+		#{roleSign},
+		#{remark},
+		#{createBy},
+		#{createDate},
+		#{updateBy},
+		#{updateDate}
+		)
+	</insert>
+
+    <delete id="remove">
+		delete from sys_role where role_id = #{value}
+	</delete>
+
+
+<select id="selectByRoleName" resultType="String">
+	SELECT role_id FROM sys_role WHERE role_name = #{rname}
+</select>
+	<update id="updateRid" parameterType="String">
+		UPDATE sys_role SET role_id= #{roleId} WHERE role_id = #{rid}
+	</update>
+
+</mapper>
