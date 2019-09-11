@@ -14,7 +14,11 @@ public class BootplumApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BootplumApplication.class, args);
-        System.err.println("启动成功");
+        System.err.println("  _, ___  _, __, ___ __, __,\n" +
+                " (_   |  /_\\ |_)  |  |_  | \\\n" +
+                " , )  |  | | | \\  |  |   |_/\n" +
+                "  ~   ~  ~ ~ ~ ~  ~  ~~~ ~  \n" +
+                "                            ");
     }
 
 }
