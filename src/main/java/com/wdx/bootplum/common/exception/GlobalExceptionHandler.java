@@ -36,7 +36,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public AjaxObject defaultErrorHandler(Exception e){
         logger.error(e.getMessage(),e);
-        return AjaxObject.customFail("服务器异常",null);
+        return AjaxObject.customFail("服务器异常",e);
     }
 
     /**
@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public AjaxObject jsonErrorHandler( BusinessApiException e){
         logger.error(e.getMsg(),e);
-        return AjaxObject.customAjax(e.getCode(),e.getMsg(),null);
+        return AjaxObject.customAjax(e.getCode(),e.getMsg(),e);
     }
 
     /**
@@ -64,7 +64,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public AjaxObject jsonErrorHandler(UnauthorizedException e){
         logger.error(e.getMessage(),e);
-        return AjaxObject.basicAjax(AjaxCodeEnum.USER__UNAUTHORIZED_ERROR,null);
+        return AjaxObject.basicAjax(AjaxCodeEnum.USER__UNAUTHORIZED_ERROR,e);
     }
     /**
      * @return org.springframework.http.ResponseEntity<com.wdx.sringboot.learn.util.AjaxObject>
@@ -77,7 +77,7 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public AjaxObject jsonErrorHandler(UnauthenticatedException e){
         logger.error(e.getMessage(),e);
-        return AjaxObject.basicAjax(AjaxCodeEnum.USER__UNAUTHENTICATED_ERROR,null);
+        return AjaxObject.basicAjax(AjaxCodeEnum.USER__UNAUTHENTICATED_ERROR,e);
     }
 
     /**
