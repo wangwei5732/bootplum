@@ -8,12 +8,13 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+
 /**
  * @Author wangwei
  * @Description //TODO com.wdx.bootplum.common.aspect.Log 注解的切面
  * @Date 11:49 2019-04-03
- * @Param 
- * @return 
+ * @Param
+ * @return
  **/
 @Aspect
 @Component
