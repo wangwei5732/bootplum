@@ -22,7 +22,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/bootplum?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
+    url: jdbc:mysql://172.28.12.1:3306/bootplum?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true
     username: root
     password: 123456
     # 阿里连接池配置
@@ -70,7 +70,7 @@ spring:
     # Redis数据库索引（默认为0）
     database: 0
     # Redis服务器地址
-    host: 39.105.92.184
+    host: 39.97.170.3
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）

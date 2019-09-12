@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.wdx</groupId>
     <artifactId>bootplum</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>bootplum</name>
     <description>staging project for Spring Boot</description>
 
@@ -204,16 +204,16 @@
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
                 </configuration>
-<!--                <executions>-->
-<!--                    &lt;!&ndash;设置运行 mvn package 的时候自动执行docker build&ndash;&gt;-->
-<!--                    <execution>-->
-<!--                        <id>default</id>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>build</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
+                <executions>
+                    <!--设置运行 mvn package 的时候自动执行docker build-->
+                    <execution>
+                        <id>default</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
         <!--mybaties,mapper.xml文件是放在src/main/java目录下,所以需要配置一下加载进去-->

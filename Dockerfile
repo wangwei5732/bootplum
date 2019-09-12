@@ -12,7 +12,7 @@ VOLUME /tmp
 EXPOSE 8888
 
 # 添加变量，如果使用dockerfile-maven-plugin，则会自动替换这里的变量内容
-ARG JAR_FILE=target/spring-boot-default-docker.jar
+ARG JAR_FILE=target/bootplum-0.0.1.jar
 
 # 往容器中添加jar包
 ADD ${JAR_FILE} app.jar
