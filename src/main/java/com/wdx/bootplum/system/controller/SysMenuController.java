@@ -25,6 +25,7 @@ import java.util.Map;
  * 菜单管理 前端控制器
  * </p>
  * http://192.168.40.102/svn/bootplum/trunk/server/bootplum
+ *
  * @author wudanhui
  * @since 2019-04-18
  */
@@ -47,6 +48,7 @@ public class SysMenuController extends BaseController {
         tree = iSysMenuService.getTree();
         return tree;
     }
+
     /**
      * 左侧菜单树
      */
@@ -56,10 +58,12 @@ public class SysMenuController extends BaseController {
         Tree<SysMenuDO> tree = new Tree<SysMenuDO>();
 
         List<SysMenuDO> list = iSysMenuService.getTreeLeft(rid);
-        return AjaxObject.customOk("查询成功",list);
+        return AjaxObject.customOk("查询成功", list);
     }
+
     /**
      * 根据角色id获取菜单树（角色编辑）
+     *
      * @param roleId
      * @return
      */
@@ -68,27 +72,28 @@ public class SysMenuController extends BaseController {
     @ResponseBody
     public AjaxObject tree(@PathVariable("roleId") String roleId) {
         Tree<SysMenuDO> tree = iSysMenuService.getTree(roleId);
-        if (tree!=null){
-            return AjaxObject.customOk("请求成功",tree);
+        if (tree != null) {
+            return AjaxObject.customOk("请求成功", tree);
         }
-        return AjaxObject.customFail("请求失败",null);
+        return AjaxObject.customFail("请求失败", null);
     }
 
     /**
      * 根据角色id获取菜单树(集合)（角色编辑）
+     *
      * @param roleId
      * @return
      */
 
     @GetMapping("/treelist/{roleId}")
     @ResponseBody
-    public AjaxObject  treeList(@PathVariable("roleId") String roleId) {
+    public AjaxObject treeList(@PathVariable("roleId") String roleId) {
 
         List<String> tree = iSysMenuService.getTreeList(roleId);
-        if (tree!=null){
-            return AjaxObject.customOk("请求成功",tree);
+        if (tree != null) {
+            return AjaxObject.customOk("请求成功", tree);
         }
-        return AjaxObject.customFail("请求失败",null);
+        return AjaxObject.customFail("请求失败", null);
     }
 
     /**
@@ -108,26 +113,28 @@ public class SysMenuController extends BaseController {
 
     /**
      * 添加菜单
+     *
      * @param sysMenuDO
      * @return
      */
     @RequiresPermissions("sys:menu:add")
     @PostMapping
-    @ApiOperation(value="添加菜单", notes="传递菜单实体类")
+    @ApiOperation(value = "添加菜单", notes = "传递菜单实体类")
     @ApiImplicitParam(name = "newSysRoleMenuDTO", value = "实体类", required = true, dataType = "SysRoleAddDTO")
-    public AjaxObject save(@RequestBody  @Validated SysMenuDO sysMenuDO ) {
+    public AjaxObject save(@RequestBody @Validated SysMenuDO sysMenuDO) {
         sysMenuDO.setCreateBy(getUserId());
         sysMenuDO.setCreateDate(DateTimeUtils.getCurrentLocalDateTime());
         if (iSysMenuService.save(sysMenuDO)) {
-            return AjaxObject.customOk("保存成功",sysMenuDO);
+            return AjaxObject.customOk("保存成功", sysMenuDO);
         }
-            return AjaxObject.customFail("保存失败",null);
+        return AjaxObject.customFail("保存失败", null);
 
     }
 
 
     /**
      * 删除菜单
+     *
      * @param mId
      * @return
      */
@@ -139,16 +146,17 @@ public class SysMenuController extends BaseController {
         if (iSysMenuService.count(mId) > 0) {
             return AjaxObject.customFail("包含子菜单不允许删除", null);
         }
-        if(iSysMenuService.removeById(mId)){
-            return AjaxObject.customOk("删除成功，id为:",mId);
+        if (iSysMenuService.removeById(mId)) {
+            return AjaxObject.customOk("删除成功，id为:", mId);
         }
-            return AjaxObject.customFail("删除失败",null);
+        return AjaxObject.customFail("删除失败", null);
 
     }
 
 
     /**
      * 根据id显示内容（编辑）
+     *
      * @param id
      * @return
      */
@@ -164,21 +172,22 @@ public class SysMenuController extends BaseController {
             if (sysMenuDO.getParentId().equals("0")) {
 
                 SysMenuAddDTO sysMenuAddDTO = SysMenuStructMapper.MAPPER.sysMenuDOToDTO(sysMenuDO, "根目录");
-                return AjaxObject.customOk("查询成功",sysMenuAddDTO);
+                return AjaxObject.customOk("查询成功", sysMenuAddDTO);
 
             }
             //如果不等于0，则根据父id查询上级部门名称
             else {
                 String pName = iSysMenuService.getById(sysMenuDO.getParentId()).getName();
-                SysMenuAddDTO sysMenuAddDTO = SysMenuStructMapper.MAPPER.sysMenuDOToDTO(sysMenuDO,pName);
-                return AjaxObject.customOk("查询成功",sysMenuAddDTO);
+                SysMenuAddDTO sysMenuAddDTO = SysMenuStructMapper.MAPPER.sysMenuDOToDTO(sysMenuDO, pName);
+                return AjaxObject.customOk("查询成功", sysMenuAddDTO);
             }
         }
-        return AjaxObject.customOk("查询成功",null);
+        return AjaxObject.customOk("查询成功", null);
     }
 
     /**
      * 修改
+     *
      * @param sysMenuDO
      * @return
      */

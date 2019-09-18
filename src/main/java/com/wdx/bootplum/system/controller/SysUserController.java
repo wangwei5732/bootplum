@@ -147,7 +147,7 @@ public class SysUserController extends BaseController {
     public AjaxObject delete(@RequestParam String[] ids) {
         SysUserDO sysUserDO = new SysUserDO();
         sysUserDO.setDeleteStatus("1");
-        if (sysUserService.update(sysUserDO,new UpdateWrapper<SysUserDO>().in("user_id",ids))) {
+        if (sysUserService.update(sysUserDO, new UpdateWrapper<SysUserDO>().in("user_id", ids))) {
             return AjaxObject.customOk("删除成功", null);
         }
         return AjaxObject.customOk("删除失败", null);
@@ -207,7 +207,7 @@ public class SysUserController extends BaseController {
     })
     @RequiresPermissions("sys:user:resetPwd")
     @PutMapping(value = "/updateUserPassword")
-    public AjaxObject updatePassword(@NotBlank(message = "密码不能为空") @RequestParam String userId,@RequestParam String password) {
+    public AjaxObject updatePassword(@NotBlank(message = "密码不能为空") @RequestParam String userId, @RequestParam String password) {
         SysUserDO sysUserDO = sysUserService.getById(userId);
         if (sysUserDO == null) {
             return AjaxObject.customOk("无此用户", null);
@@ -218,7 +218,6 @@ public class SysUserController extends BaseController {
         }
         return AjaxObject.customOk("修改失败", null);
     }
-
 
 
 }
