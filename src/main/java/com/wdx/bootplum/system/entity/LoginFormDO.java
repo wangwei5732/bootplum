@@ -13,7 +13,6 @@ import javax.validation.constraints.NotBlank;
  * @since 2019-09-18 15:21
  */
 @Data
-@ApiModel(value = "用户登录表单信息")
 public class LoginFormDO {
     @ApiModelProperty("用户名")
     @NotBlank(message = "用户名为空")

@@ -22,11 +22,13 @@ import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
+
 
 /**
  * <p>
@@ -53,11 +55,12 @@ public class LoginController extends BaseController {
     @PostMapping(value = "login")
     @ApiOperation(value = "用户登录", notes = "用户登录")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "loginForm", value = "用户登录信息", required = true, paramType = "query", dataType = "LoginFormDO")
+            @ApiImplicitParam(dataType = "LoginFormDO", name = "loginForm", value = "用户登录信息", required = true, paramType = "body")
     })
-    public AjaxObject login(@RequestBody LoginFormDO loginForm) throws Exception {
+    public AjaxObject login(@RequestBody @Validated LoginFormDO loginForm) throws Exception {
 
-        String password = MD5Utils.encrypt(loginForm.getUsername(), loginForm.getPassword());
+        String password = MD5Utils.encrypt
+                (loginForm.getUsername(), loginForm.getPassword());
         UsernamePasswordToken token = new UsernamePasswordToken(loginForm.getUsername(), password);
         Subject subject = SecurityUtils.getSubject();
         try {

@@ -6,12 +6,14 @@ import com.wdx.bootplum.system.entity.structmaps.SysMenuStructMapper;
 import com.wdx.bootplum.system.entity.structmaps.SysRoleStructMapper;
 import com.wdx.bootplum.system.entity.structmaps.SysUserStructMapper;
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +22,10 @@ import java.util.List;
  * @Date: 2019-04-10 15:05
  * @Description:
  */
-@RunWith(SpringRunner.class)
-@SpringBootTest(classes = BootplumApplication.class)
+//@RunWith(SpringRunner.class)
+//@SpringBootTest(classes = BootplumApplication.class)
 public class StructMapperTest {
+    private static final Logger logger = LoggerFactory.getLogger(StructMapperTest.class);
     @Autowired
     RedisProperties redisProperties;
 
@@ -113,4 +116,19 @@ public class StructMapperTest {
         System.out.println(redisProperties.getHost());
     }
 
+    @Test
+    public void testJJS() {
+        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+        ScriptEngine scriptEngine = scriptEngineManager.getEngineByName("nashorn");
+        try {
+            scriptEngine.eval("var imports = new JavaImporter(org.slf4j); " +
+                    "print(imports);" +
+                    "var logger = Java.type(\"org.slf4j.LoggerFactory\").getLogger(\"scriptType\");" +
+                    "logger.info('hello hahah')");
+
+        } catch (ScriptException e) {
+            e.printStackTrace();
+        }
+        logger.info("helllo");
+    }
 }

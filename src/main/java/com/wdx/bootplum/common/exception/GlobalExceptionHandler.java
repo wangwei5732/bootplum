@@ -13,44 +13,46 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+
 /**
  * @Author wangwei
  * @Description //TODO 统一异常处理
  * @Date 19:44 2019-03-13
- * @Param 
- * @return 
+ * @Param
+ * @return
  **/
 @ControllerAdvice
 public class GlobalExceptionHandler {
     private Logger logger = LoggerFactory.getLogger(getClass());
 //    @Autowired
 //    LogService logService;
+
     /**
+     * @return com.wdx.bootplum.common.vo.AjaxObject
      * @Author wangwei
      * @Description //TODO 统一处理全局异常
      * @Date 17:17 2019-03-13
      * @Param [e]
-     * @return com.wdx.bootplum.common.vo.AjaxObject
      **/
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public AjaxObject defaultErrorHandler(Exception e){
-        logger.error(e.getMessage(),e);
-        return AjaxObject.customFail("服务器异常",e);
+    public AjaxObject defaultErrorHandler(Exception e) {
+        logger.error(e.getMessage(), e);
+        return AjaxObject.customFail("服务器异常", e);
     }
 
     /**
+     * @return com.wdx.bootplum.common.vo.AjaxObject
      * @Author wangwei
      * @Description //TODO 统一处理API异常
      * @Date 19:32 2019-03-13
      * @Param [e]
-     * @return com.wdx.bootplum.common.vo.AjaxObject
      **/
     @ExceptionHandler(value = BusinessApiException.class)
     @ResponseBody
-    public AjaxObject jsonErrorHandler( BusinessApiException e){
-        logger.error(e.getMsg(),e);
-        return AjaxObject.customAjax(e.getCode(),e.getMsg(),e);
+    public AjaxObject jsonErrorHandler(BusinessApiException e) {
+        logger.error(e.getMsg(), e);
+        return AjaxObject.customAjax(e.getCode(), e.getMsg(), e);
     }
 
     /**
@@ -62,10 +64,11 @@ public class GlobalExceptionHandler {
      **/
     @ExceptionHandler(value = UnauthorizedException.class)
     @ResponseBody
-    public AjaxObject jsonErrorHandler(UnauthorizedException e){
-        logger.error(e.getMessage(),e);
-        return AjaxObject.basicAjax(AjaxCodeEnum.USER__UNAUTHORIZED_ERROR,e);
+    public AjaxObject jsonErrorHandler(UnauthorizedException e) {
+        logger.error(e.getMessage(), e);
+        return AjaxObject.basicAjax(AjaxCodeEnum.USER__UNAUTHORIZED_ERROR, e);
     }
+
     /**
      * @return org.springframework.http.ResponseEntity<com.wdx.sringboot.learn.util.AjaxObject>
      * @Author wangwei
@@ -75,9 +78,9 @@ public class GlobalExceptionHandler {
      **/
     @ExceptionHandler(value = UnauthenticatedException.class)
     @ResponseBody
-    public AjaxObject jsonErrorHandler(UnauthenticatedException e){
-        logger.error(e.getMessage(),e);
-        return AjaxObject.basicAjax(AjaxCodeEnum.USER__UNAUTHENTICATED_ERROR,e);
+    public AjaxObject jsonErrorHandler(UnauthenticatedException e) {
+        logger.error(e.getMessage(), e);
+        return AjaxObject.basicAjax(AjaxCodeEnum.USER__UNAUTHENTICATED_ERROR, e);
     }
 
     /**
@@ -89,8 +92,9 @@ public class GlobalExceptionHandler {
      **/
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     @ResponseBody
-    public AjaxObject jsonErrorHandler(MethodArgumentNotValidException e){
-        logger.error(e.getMessage(),e);
+    public AjaxObject jsonErrorHandler(MethodArgumentNotValidException e) {
+        //配置异常为info级别
+        logger.info(e.getMessage(), e);
         List<ObjectError> fieldErrorList = e.getBindingResult().getAllErrors();
         String errorList = "";
         for (int i = 0; i < fieldErrorList.size(); i++) {
@@ -99,7 +103,7 @@ public class GlobalExceptionHandler {
             }
             errorList += fieldErrorList.get(i).getDefaultMessage();
         }
-        return AjaxObject.basicAjax(AjaxCodeEnum.INVALID_PARAMETERS,errorList);
+        return AjaxObject.basicAjax(AjaxCodeEnum.INVALID_PARAMETERS, errorList);
     }
 }
 

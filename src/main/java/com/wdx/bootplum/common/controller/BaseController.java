@@ -2,15 +2,14 @@ package com.wdx.bootplum.common.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wdx.bootplum.common.constant.PageCons;
-import com.wdx.bootplum.system.entity.SysUserDO;
 import com.wdx.bootplum.common.utils.AntiSQLFilter;
 import com.wdx.bootplum.common.utils.TypeUtils;
+import com.wdx.bootplum.system.entity.SysUserDO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 
 /**
@@ -25,10 +24,8 @@ public class BaseController {
     @Autowired
     protected HttpServletRequest request;
 
-    @Autowired
-    protected HttpServletResponse response;
 
-    public Session getSession(){
+    public Session getSession() {
         return SecurityUtils.getSubject().getSession();
     }
 
