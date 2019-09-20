@@ -5,19 +5,19 @@ server:
 spring:
   ## quartz
   # 采用数据库存储方式
-#  quartz:
-#    job-store-type: jdbc
-#    jdbc:
-#      comment-prefix:
+  #  quartz:
+  #    job-store-type: jdbc
+  #    jdbc:
+  #      comment-prefix:
   logging:
     level:
       root: error
       com.bootdo: infogit
       #时间格式配置
   jackson:
-        date-format: yyyy-MM-dd HH:mm:ss
-        time-zone: GMT+8
-        locale: zh
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    locale: zh
   # MP数据源配置
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
