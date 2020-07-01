@@ -18,7 +18,7 @@
         <java.version>1.8</java.version>
         <spring-boot.version>1.5.9.RELEASE</spring-boot.version>
         <druid-version>1.1.10</druid-version>
-        <mysql-version>5.1.16</mysql-version>
+        <mysql-version>8.0.16</mysql-version>
         <mybaties-plus-version>3.1.0</mybaties-plus-version>
         <shiro.version>1.4.0</shiro.version>
         <shiroRedis.version>3.2.2</shiroRedis.version>
